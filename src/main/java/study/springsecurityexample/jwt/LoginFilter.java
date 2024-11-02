@@ -1,15 +1,17 @@
 package study.springsecurityexample.jwt;
 
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.security.sasl.AuthenticationException;
+import java.io.IOException;
 
 @AllArgsConstructor
 public class LoginFilter extends UsernamePasswordAuthenticationFilter {
@@ -39,7 +41,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     // 인증 실패시 호출
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
         System.out.println("failed authentication");
     }
 }
